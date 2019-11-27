@@ -1,10 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
 import Nav from '../components/nav';
-import { useRouter } from 'next/router';
-import cats from '../data';
+import fetch from 'cross-fetch';
+// import { useRouter } from 'next/router';
 
-export default function BikeCats() {
+export default function BikeCats({ data }) {
+  const cat = data.rows;
   return (
     <div>
       <Head>
@@ -14,11 +15,12 @@ export default function BikeCats() {
       <Nav />
 
       <ul>
-        {cats.map(catobj => (
+        {cat.map(catobj => (
           <li>
             | {catobj.category} |{' '}
             <a href={'./bikes/' + catobj.id}>{catobj.name}</a>| Price: €
-            {catobj.price}|<br />
+            {catobj.price} |<br />
+            <br />
             <img src={catobj.img} alt={catobj.name} />
           </li>
         ))}
@@ -38,12 +40,20 @@ export default function BikeCats() {
 
         li {
           margin: 25px;
-          width: 40%;
+          width: 50%;
         }
         img {
-          width: 200px;
+          width: 220px;
         }
       `}</style>
     </div>
   );
 }
+
+BikeCats.getInitialProps = async () => {
+  const response = await fetch(`http://localhost:3000/api`);
+
+  const data = await response.json();
+
+  return { data };
+};
