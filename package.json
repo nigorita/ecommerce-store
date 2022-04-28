@@ -10,7 +10,7 @@
   "dependencies": {
     "@slonik/migrator": "^0.1.13",
     "@types/slonik": "^19.0.0",
-    "cross-fetch": "^3.0.4",
+    "cross-fetch": "^3.1.5",
     "esm": "^3.2.25",
     "jest": "^24.9.0",
     "js-cookie": "^2.2.1",
